@@ -4,7 +4,7 @@
  * @Author: aleks
  * @Date:   2020-11-11 07:55:32
  * @Last Modified by:   aleks
- * @Last Modified time: 2020-11-27 12:59:23
+ * @Last Modified time: 2020-11-27 14:52:51
  */
 namespace App\Http\Controllers;
 use App\UrlModel;
@@ -18,10 +18,12 @@ class MainController extends Controller
 
     public function index(Request $request)
     {
+        echo env('APP_URL');
+
         $url = $request->get('url');
         $redir = $request->get('redir');
         if($redir) {
-            $model = UrlModel::where('short_url', 'http://laravel5.tz/?redir='.$redir)->first();
+            $model = UrlModel::where('short_url', (env('APP_URL')).'/?redir='.$redir)->first();
             return Redirect::to($model->url);
         }
 

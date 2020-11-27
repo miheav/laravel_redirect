@@ -21,8 +21,8 @@ class UrlModel extends Model
             for($i=0; $i<6; $i++) {
                 $string.=self::$keys[random_int(0,$quantitySymb)];
             }
-            $string = ("http://laravel5.tz/?redir=").$string;
-        } while($this->where('short_url', '=', $string)->first());
+            $string = (env('APP_URL'))."/?redir=".$string;
+        } while($this->where('short_url', '=', (env('APP_URL'))."/?redir=".$string)->first());
 
         if($model = $this->where('url', '=', $this->url)->first()){
             return $model->short_url;
